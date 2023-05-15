@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
+import { DataManagerService } from 'src/app/services/data-manager/data-manager.service';
 
 @Component({
   selector: 'app-todo-add',
@@ -10,18 +11,10 @@ export class TodoAddComponent {
 
   newTodo: Todo = {title:'', priority:1, description: ''}
 
-  @Output() todoCreated: EventEmitter<Todo> = new EventEmitter();
-
+  constructor(private dataMangerServ: DataManagerService){}
 
   saveTodo(){
-    // const titleInput = document.getElementById('input-title') as HTMLInputElement;
-    // const descriptionInput = document.getElementById('input-description') as HTMLInputElement;
-    // const priorityInput = document.getElementById('input-priority') as HTMLInputElement;
-
-    // const newTodo: Todo = {title: titleInput.value,
-    //                        description: descriptionInput.value,
-    //                        priority: parseInt(priorityInput.value)};
-    this.todoCreated.emit({...this.newTodo});
+    this.dataMangerServ.addTodo({...this.newTodo})
   }
 
 }

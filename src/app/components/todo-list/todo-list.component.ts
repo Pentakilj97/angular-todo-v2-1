@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
+import { DataManagerService } from 'src/app/services/data-manager/data-manager.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,11 +9,8 @@ import { Todo } from 'src/app/models/todo';
 })
 export class TodoListComponent {
 
-  @Input() todoArray:Todo[] = []
+  constructor(public dataMangerServ: DataManagerService){
 
-  deleteTodo(todoToDelete: Todo){
-    console.log('Devo cancellare', todoToDelete.title);
-    this.todoArray = this.todoArray.filter(todo => todo.title !== todoToDelete.title);
   }
 
 }
